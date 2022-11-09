@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>pamudoan</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/select2.min.css') }}" />
+
+        <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>        
+    </head>
+
+    <body>
+        <div class="container-fluid vh-100">
+            <div class="page-header pb-2">
+                <div class="row" style="height: 10%">
+                    <div class="col-sm-8"><h1 style="font-size: 1.5em; font-weight: bold;">PACE Multi-Document Annotation-Tool</h1> </div>
+                    <div class="col-sm-4 text-end text-black-50"><small><i class="fa fa-user"></i>&nbsp;{{ user }}</small></div>
+                    <div class="w-100"></div>
+                    <div class="col-sm-8">Gratulation! Alle Dokumente sind annotiert. </div>
+                    <div class="col-sm-4 text-end"> 
+                        <!-- <a href="{{ url_for('static', filename='documentation/help.md') }}" class="btn" target="_blank"><i class="fa fa-question-circle btn-icon-append"></i></a> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="height: 90%">
+                <img src="{{ url_for('static', filename='img/firework.gif') }}" alt="Firework">
+            </div>
+        </div>
+        
+        <!-- user-feedback (flash-messages for save, error,..) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="msg-flash" class="fixed-bottom w-50 mx-auto" {%- if not messages -%} style="display: none" {%- endif -%}>
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}" role="alert">
+                            {%- if category == "success" -%}
+                                <i class="fa fa-2x fa-check-square-o">&nbsp;</i>
+                            {%- else -%}
+                                <i class="fa fa-2x fa-exclamation-triangle">&nbsp;</i><b>Fehler! &nbsp;</b>
+                            {%- endif -%}
+                            <span style="font-size: 1.5em;">{{ message }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+    </body>
+</html>
